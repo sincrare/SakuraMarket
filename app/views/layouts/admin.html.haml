@@ -1,0 +1,8 @@
+- content_for :content do
+  .col-md-2.sidebar
+    %ul
+      %li= link_to '商品管理', admin_items_path
+      %li= link_to 'ユーザー管理', admin_users_path
+  .col-md-10
+    = yield
+= render template: 'layouts/application'

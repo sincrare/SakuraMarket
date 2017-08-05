@@ -1,0 +1,26 @@
+
+%p
+  %b 商品名:
+  = @item.name
+%p
+  %b 価格:
+  = @item.price
+%p
+  %b 説明:
+  = @item.discription
+%p
+  %b Image:
+  - if @item.image?
+    .thumbnail
+      = image_tag @item.image.url
+
+- if user_signed_in?
+  - stocked_item = current_user.stocked_items.find_or_create_by(item: @item)
+  = form_for stocked_item do |f|
+    .field
+      = f.label :add_count
+      = f.number_field :add_count
+    .actions
+      = f.submit 'ショッピングカートに追加する'
+
+= link_to 'Back', items_path

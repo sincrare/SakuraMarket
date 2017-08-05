@@ -1,0 +1,10 @@
+%h1 商品一覧
+
+
+%ul
+  %li
+    - @items.each do |item|
+      %dl.item
+        %dt= link_to image_tag(item.image.url), item
+        %dd.item_name= item.name
+        %dd.item_price= "#{item.price}円"

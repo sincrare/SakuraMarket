@@ -1,0 +1,27 @@
+%h1 Listing items
+
+%table.table-bordered.table-sortable
+  %thead
+    %tr
+      %th Name
+      %th Price
+      %th Row order
+      %th Image
+      %th
+      %th
+      %th
+
+  %tbody
+    - @items.each do |item|
+      %tr.item{data: { model_name: item.class.name.underscore, update_url: admin_item_sort_path(item) }}
+        %td= item.name
+        %td= item.price
+        %td= item.row_order
+        %td= item.image
+        %td= link_to 'Show', admin_item_path(item)
+        %td= link_to 'Edit', edit_admin_item_path(item)
+        %td= link_to 'Destroy', admin_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Item', new_admin_item_path

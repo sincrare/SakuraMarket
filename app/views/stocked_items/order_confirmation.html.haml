@@ -1,0 +1,77 @@
+%h1 注文確認
+
+%table
+  %thead
+    %tr
+      %th 商品名
+      %th 個数
+      %th
+      %th
+      %th
+
+  %tbody
+    - @stocked_items.each do |stocked_item|
+      %tr
+        %td= stocked_item.item.name
+        %td= stocked_item.count
+        %td= link_to '商品ページ', item_path(stocked_item.item)
+        %td= link_to '削除', stocked_item, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+.field
+  .total_amount
+    合計金額
+    = @stocked_items.total_amount
+
+.field
+  .cod_fee
+    代引き手数料
+    = @stocked_items.cod_fee
+
+.field
+  .shipping 
+    送料
+    = @stocked_items.shipping
+
+.field
+  .sales_tax
+    消費税
+    = @stocked_items.sales_tax
+
+.field
+  .billing_amount
+    請求金額
+    = @stocked_items.billing_amount
+
+%section
+  %h1= '送付先'
+  %p
+    名前
+    = current_user.name
+  %p
+    郵便番号
+    = current_user.zip
+  %p
+    住所
+    = current_user.address
+  = link_to '送付先を変更する', users_edit_address_path
+
+- order_history = current_user.order_histories.build
+= form_for order_history do |f|
+  - if @order_history != nil && @order_history.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@order_history.errors.count, "error")} prohibited this order_history from being saved:"
+      %ul
+        - @order_history.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label '配送希望日'
+    = f.select :delivery_date, options_for_select(@stocked_items.delivery_date_candidates)
+    = f.select :delivery_time, options_for_select(@stocked_items.delivery_time_candidates)
+  .actions
+    = f.submit '注文を確定する'
+
+=link_to '商品一覧に戻る', items_path
+=link_to 'ショッピングカートに戻る', stocked_items_path 

@@ -1,0 +1,22 @@
+%h1 Listing stocked_items
+
+%table
+  %thead
+    %tr
+      %th 商品名
+      %th 個数
+      %th
+      %th
+      %th
+
+  %tbody
+    - @stocked_items.each do |stocked_item|
+      %tr
+        %td= stocked_item.item.name
+        %td= stocked_item.count
+        %td= link_to 'Show', stocked_item
+        %td= link_to 'Destroy', stocked_item, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+=link_to '注文確認に進む', order_confirmation_stocked_items_path

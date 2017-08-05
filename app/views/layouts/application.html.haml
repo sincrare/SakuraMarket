@@ -1,0 +1,40 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title さくらマーケット
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %nav.navbar.navbar-default
+      %a.navbar-brand{href: items_path} さくらマーケット
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li
+            %p.navbar-text
+              Login as 
+              %strong= current_user.email
+          %li
+            = link_to 'ショッピングカート', stocked_items_path
+          %li
+            = link_to '購入履歴', order_histories_path
+          %li
+            = link_to 'プロフィール変更', edit_user_registration_path
+          %li
+            = link_to 'ログアウト', destroy_user_session_path, method: :delete
+        - else
+          %li
+            = link_to 'サインイン', new_user_registration_path
+          %li
+            = link_to 'ログイン', new_user_session_path
+
+    %header
+      - if notice
+        %p.notice= notice
+      - if alert
+        %p.alert= alert
+
+    %main(role='main' class='container-fluid')
+      .row
+        = content_for?(:content) ? yield(:content) : yield

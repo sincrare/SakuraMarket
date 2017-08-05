@@ -1,0 +1,24 @@
+%h1 Listing order_histories
+
+%table
+  %thead
+    %tr
+      %th DeliveryDateFrom
+      %th DeliveryDateTo
+      %th Shipping
+      %th SalesTax
+      %th TotalAmount
+      %th BillingAmount
+      %th
+
+  %tbody
+    - @order_histories.each do |order_history|
+      %tr
+        %td= order_history.delivery_date_from
+        %td= order_history.delivery_date_to
+        %td= order_history.shipping
+        %td= order_history.sales_tax
+        %td= order_history.total_amount
+        %td= order_history.billing_amount
+        %td= link_to 'Show', order_history
+

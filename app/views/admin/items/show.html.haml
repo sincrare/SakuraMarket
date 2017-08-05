@@ -1,0 +1,19 @@
+
+%p
+  %b Name:
+  = @item.name
+%p
+  %b Price:
+  = @item.price
+%p
+  %b Discription:
+  = @item.discription
+%p
+  %b Image:
+  - if @item.image?
+    .thumbnail
+      = image_tag @item.image.url
+
+= link_to 'Edit', edit_admin_item_path(@item)
+\|
+= link_to 'Back', admin_items_path

@@ -1,0 +1,20 @@
+%p
+  %b Deliverydatefrom:
+  = @order_history.delivery_date_from
+%p
+  %b Deliverydateto:
+  = @order_history.delivery_date_to
+%p
+  %b Shipping:
+  = @order_history.shipping
+%p
+  %b SalesTax:
+  = @order_history.sales_tax
+%p
+  %b Totalamount:
+  = @order_history.total_amount
+%p
+  %b Billingamount:
+  = @order_history.billing_amount
+
+= link_to 'Back', order_histories_path
