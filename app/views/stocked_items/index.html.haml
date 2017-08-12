@@ -1,21 +1,25 @@
-%h1 Listing stocked_items
+%h1 ショッピングカート
 
-%table
+%table.table.table-bordered.table-striped
   %thead
     %tr
+      %th 商品画像
       %th 商品名
+      %th 価格
       %th 個数
-      %th
-      %th
-      %th
+      %th.col_buttons 操作
 
   %tbody
     - @stocked_items.each do |stocked_item|
       %tr
+        %td
+          .item_image_frame_small= image_tag(stocked_item.item.image, class: 'img-rounded')
         %td= stocked_item.item.name
+        %td= price_format(stocked_item.item.price)
         %td= stocked_item.count
-        %td= link_to 'Show', stocked_item
-        %td= link_to 'Destroy', stocked_item, method: :delete, data: { confirm: 'Are you sure?' }
+        %td
+          = link_to '商品ページ', item_path(stocked_item.item), class: 'btn btn-info'
+          = link_to '削除', stocked_item, method: :delete, data: { confirm: '商品を削除してよろしいですか？' }, class: 'btn btn-danger'
 
 %br
 

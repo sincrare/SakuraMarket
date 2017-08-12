@@ -22,7 +22,7 @@ class Admin::ItemsController < ApplicationController
     @item = Item.new(item_params)
 
     if @item.save
-      redirect_to admin_item_path(@item), notice: 'Item was successfully created.'
+      redirect_to admin_item_path(@item), notice: '商品を登録しました。'
     else
       render :new
     end
@@ -30,7 +30,7 @@ class Admin::ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to admin_item_path(@item), notice: 'Item was successfully updated.'
+      redirect_to admin_item_path(@item), notice: '商品情報を更新しました。'
     else
       render :edit
     end
@@ -38,7 +38,7 @@ class Admin::ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to admin_items_url, notice: 'Item was successfully destroyed.'
+    redirect_to admin_items_url, notice: '商品を削除しました。'
   end
 
   def sort

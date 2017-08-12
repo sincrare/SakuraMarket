@@ -1,77 +1,72 @@
 %h1 注文確認
 
-%table
+%table.table.table-bordered.table-striped
   %thead
     %tr
+      %th 商品画像
       %th 商品名
+      %th 価格
       %th 個数
-      %th
-      %th
-      %th
+      %th.col_buttons 操作
 
   %tbody
     - @stocked_items.each do |stocked_item|
       %tr
+        %td
+          .item_image_frame_small= image_tag(stocked_item.item.image, class: 'img-rounded')
         %td= stocked_item.item.name
+        %td= price_format(stocked_item.item.price)
         %td= stocked_item.count
-        %td= link_to '商品ページ', item_path(stocked_item.item)
-        %td= link_to '削除', stocked_item, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to '商品ページ', item_path(stocked_item.item), class: 'btn btn-info'
 
-%br
+.row
+  .col-md-6
+    %h1= '請求金額'
+    %table.table.table-bordered.table-striped
+      %tr
+        %th 合計金額
+        %td= price_format(@stocked_items.total_amount)
+      %tr
+        %th 代引き手数料
+        %td= price_format(@stocked_items.cod_fee)
+      %tr
+        %th 送料
+        %td= price_format(@stocked_items.shipping)
+      %tr
+        %th 消費税
+        %td= price_format(@stocked_items.sales_tax)
+      %tr
+        %th 請求金額
+        %td= price_format(@stocked_items.billing_amount)
 
-.field
-  .total_amount
-    合計金額
-    = @stocked_items.total_amount
-
-.field
-  .cod_fee
-    代引き手数料
-    = @stocked_items.cod_fee
-
-.field
-  .shipping 
-    送料
-    = @stocked_items.shipping
-
-.field
-  .sales_tax
-    消費税
-    = @stocked_items.sales_tax
-
-.field
-  .billing_amount
-    請求金額
-    = @stocked_items.billing_amount
-
-%section
-  %h1= '送付先'
-  %p
-    名前
-    = current_user.name
-  %p
-    郵便番号
-    = current_user.zip
-  %p
-    住所
-    = current_user.address
-  = link_to '送付先を変更する', users_edit_address_path
+  .col-md-6
+    %h1= '送付先'
+    %table.table.table-bordered.table-striped
+      %tr
+        %th 名前
+        %td= current_user.name
+      %tr
+        %th 郵便番号
+        %td= current_user.zip
+      %tr
+        %th 住所
+        %td= current_user.address
+    = link_to '送付先を変更する', users_edit_address_path, class: 'btn btn-primary'
 
 - order_history = current_user.order_histories.build
-= form_for order_history do |f|
+= simple_form_for order_history do |f|
   - if @order_history != nil && @order_history.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@order_history.errors.count, "error")} prohibited this order_history from being saved:"
-      %ul
-        - @order_history.errors.full_messages.each do |message|
-          %li= message
-
+    %ul
+      - @order_history.errors.full_messages.each do |message|
+        %li.msg_error= message
   .field
     = f.label '配送希望日'
-    = f.select :delivery_date, options_for_select(@stocked_items.delivery_date_candidates)
+    = f.select :delivery_date, @stocked_items.delivery_date_candidates.map{ |d| [date_format(d), d] }
     = f.select :delivery_time, options_for_select(@stocked_items.delivery_time_candidates)
-  .actions
-    = f.submit '注文を確定する'
+  %br
+  = f.button :submit, '注文を確定する', class: 'btn btn-warning'
+%br
 
 =link_to '商品一覧に戻る', items_path
+\|
 =link_to 'ショッピングカートに戻る', stocked_items_path 

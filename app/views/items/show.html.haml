@@ -1,26 +1,34 @@
+.row
+  .col-md-3
+    %p
+      %b 商品名:
+      = @item.name
+    %p
+      %b 価格:
+      = price_format(@item.price)
+    %p
+      %b 商品説明:
+      = simple_format(@item.discription)
+    - if user_signed_in?
+      - stocked_item = current_user.stocked_items.find_or_create_by(item: @item)
+      = simple_form_for stocked_item do |f|
+        - if @stocked_item != nil && @stocked_item.errors.any?
+          %ul
+            - @stocked_item.errors.full_messages.each do |message|
+              %li.msg_error= message
+        = f.input :add_count, as: :integer
+        = f.input :item_id, as: :hidden, value: @item.id
+        = f.button :submit, 'ショッピングカートに追加する', class: 'btn btn-primary'
 
-%p
-  %b 商品名:
-  = @item.name
-%p
-  %b 価格:
-  = @item.price
-%p
-  %b 説明:
-  = @item.discription
-%p
-  %b Image:
-  - if @item.image?
-    .thumbnail
-      = image_tag @item.image.url
+    %br
+    = link_to '商品一覧に戻る', items_path
+    %br
+    %br
 
-- if user_signed_in?
-  - stocked_item = current_user.stocked_items.find_or_create_by(item: @item)
-  = form_for stocked_item do |f|
-    .field
-      = f.label :add_count
-      = f.number_field :add_count
-    .actions
-      = f.submit 'ショッピングカートに追加する'
+  .col-md-9
+    %p
+      %b 商品画像:
+      - if @item.image?
+        .thumbnail
+          = image_tag @item.image.url
 
-= link_to 'Back', items_path

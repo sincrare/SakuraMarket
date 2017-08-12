@@ -1,19 +1,19 @@
 
 %p
-  %b Name:
+  %b 商品名:
   = @item.name
 %p
-  %b Price:
-  = @item.price
+  %b 価格:
+  = price_format(@item.price)
 %p
-  %b Discription:
+  %b 商品説明:
   = @item.discription
 %p
-  %b Image:
+  %b 商品画像:
   - if @item.image?
     .thumbnail
       = image_tag @item.image.url
 
-= link_to 'Edit', edit_admin_item_path(@item)
+= link_to '編集', edit_admin_item_path(@item)
 \|
-= link_to 'Back', admin_items_path
+= link_to '商品一覧に戻る', admin_items_path

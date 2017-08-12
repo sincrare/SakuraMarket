@@ -1,24 +1,11 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: users_update_address_path , html: { method: :put }) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :name
-    %br/
-    = f.text_field :name
-  .field
-    = f.label :zip
-    %br/
-    = f.text_field :zip
-  .field
-    = f.label :address
-    %br/
-    = f.text_field :address
-  .field
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password, autocomplete: "off"
-  .actions
-    = f.submit "Update"
-= link_to "Back", order_confirmation_stocked_items_path
+.row
+  .col-md-5
+    %h2 送付先情報の変更
+    = simple_form_for(resource, as: resource_name, url: users_update_address_path , html: { method: :put }) do |f|
+      = f.input :name
+      = f.input :zip
+      = f.input :address
+      = f.input :current_password, input_html: { autocomplete: 'off' }, as: :password
+      = f.button :submit, '更新する', class: 'btn btn-primary'
+    %br
+    = link_to "注文確認画面に戻る", order_confirmation_stocked_items_path

@@ -20,10 +20,11 @@ class OrderHistoriesController < ApplicationController
     @order_history = current_user.order_histories.build(order_history_params)
 
     if @order_history.save
+      current_user.stocked_items.delete_all
       redirect_to @order_history, notice: 'Order history was successfully created.'
     else
       @stocked_items = current_user.stocked_items.all
-      render order_confirmation_stocked_items_path
+      render 'stocked_items/order_confirmation'
     end
   end
 

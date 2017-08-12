@@ -1,0 +1,7 @@
+ja:
+  simple_form:
+    hints:
+      user:
+        password: 'パスワードを変更しない場合は空欄にしてください'
+        current_password: 'ユーザー情報の変更には現在のパスワードの入力が必須です'
+

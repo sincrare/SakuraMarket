@@ -1,20 +1,46 @@
 %p
-  %b Deliverydatefrom:
-  = @order_history.delivery_date_from
+  %b 注文日:
+  = datetime_format(@order_history.created_at)
 %p
-  %b Deliverydateto:
-  = @order_history.delivery_date_to
+  %b 配送希望日:
+  = delivery_datetime_range_format(@order_history.delivery_date_from, @order_history.delivery_date_to)
 %p
-  %b Shipping:
-  = @order_history.shipping
+  %b 代引き手数料:
+  = price_format(@order_history.cod_fee)
 %p
-  %b SalesTax:
-  = @order_history.sales_tax
+  %b 送料:
+  = price_format(@order_history.shipping)
 %p
-  %b Totalamount:
-  = @order_history.total_amount
+  %b 消費税:
+  = price_format(@order_history.sales_tax)
 %p
-  %b Billingamount:
-  = @order_history.billing_amount
+  %b 合計金額:
+  = price_format(@order_history.total_amount)
+%p
+  %b 請求金額:
+  = price_format(@order_history.billing_amount)
 
-= link_to 'Back', order_histories_path
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th 商品画像
+      %th 商品名
+      %th 価格
+      %th 個数
+      %th 商品ページ
+
+  %tbody
+    - @order_history.ordered_items.each do |ordered_item|
+      %tr
+        %td
+          .item_image_frame_small= image_tag(ordered_item.image, class: 'img-rounded')
+        %td= ordered_item.name
+        %td= ordered_item.price
+        %td= ordered_item.count
+        %td
+          - if ordered_item.item != nil
+            = link_to '商品ページ', item_path(ordered_item.item), class: 'btn btn-info'
+          - else
+            対象商品は現在取り扱っていません
+
+= link_to '購入履歴に戻る', order_histories_path

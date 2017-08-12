@@ -30,7 +30,8 @@ class StockedItemsController < ApplicationController
     if @stocked_item.update(stocked_item_params)
       redirect_to stocked_items_path, notice: 'ショッピングカートに追加しました。'
     else
-      render :edit
+      @item = Item.active.find(stocked_item_params[:item_id])
+      render 'items/show'
     end
   end
 
@@ -40,6 +41,9 @@ class StockedItemsController < ApplicationController
   end
 
   def order_confirmation
+    if current_user.stocked_items.blank?
+      redirect_to stocked_items_url, notice: 'ショッピングカートに商品を追加してください。'
+    end
   end
 
   private
@@ -52,6 +56,6 @@ class StockedItemsController < ApplicationController
     end
 
     def stocked_item_params
-      params.require(:stocked_item).permit(:item_id, :count, :add_count)
+      params.require(:stocked_item).permit(:item_id, :add_count)
     end
 end

@@ -1,4 +1,5 @@
 class StockedItem < ApplicationRecord
+  validates :add_count, numericality: { greater_than: 0 }
   belongs_to :user
   belongs_to :item
 
@@ -35,13 +36,12 @@ class StockedItem < ApplicationRecord
   end
 
   def self.delivery_date_candidates
-    wd = ['日', '月', '火', '水', '木', '金', '土']
     date = Date.current.since(3.days)
     business_date_range = 11
-    delivery_date_candidate = {}
+    delivery_date_candidate = []
     business_date_range.times do
       date = date.tomorrow while (date.wday <= 0 or date.wday >= 6 or HolidayJapan.check(date))
-      delivery_date_candidate[date.strftime("%Y年%m月%d日(#{wd[date.wday]})")] = date
+      delivery_date_candidate.push(date)
       date = date.tomorrow
     end
     delivery_date_candidate

@@ -1,2 +1,17 @@
-%h1 Admin::Users#show
-%p Find me in app/views/admin/users/show.html.haml
+
+%p
+  %b メールアドレス:
+  = @user.email
+%p
+  %b 名前:
+  = @user.name
+%p
+  %b 郵便番号:
+  = @user.zip
+%p
+  %b 住所
+  = @user.address
+
+= link_to '編集', edit_admin_user_path(@user)
+\|
+= link_to 'ユーザー一覧に戻る', admin_users_path

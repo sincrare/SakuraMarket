@@ -1,7 +1,7 @@
 class OrderHistory < ApplicationRecord
   validate :shipping_address_validate
   belongs_to :user
-  has_many :ordered_items
+  has_many :ordered_items, dependent: :destroy
   accepts_nested_attributes_for :ordered_items
 
   attr_accessor :delivery_date

@@ -3,3 +3,48 @@
 @import "jquery-ui/datepicker";
 @import "bootstrap";
 @import "bootstrap-sprockets";
+
+.item_list{
+  padding: 5px;
+}
+
+.item_frame{
+  float: left;
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  list-style: none;
+  display: table;
+}
+
+.item_frame dl{
+  margin: 0px;
+}
+
+.item_image_frame{
+  width: 200px;
+  height: 220px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.item_image_frame img{
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.item_image_frame_small img{
+  max-width: 80px;
+  max-height: 80px;
+}
+
+.col_buttons{
+  width: 200px;
+}
+
+.msg_error{
+  color: red;
+}

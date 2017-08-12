@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :stocked_items
-  has_many :order_histories
+  has_many :stocked_items, dependent: :destroy
+  has_many :order_histories, dependent: :destroy
   validates :name, presence: true
   validates :zip, length: { maximum: 7 }
 

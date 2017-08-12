@@ -1,24 +1,26 @@
-%h1 Listing order_histories
+%h1 購入履歴
 
-%table
+%table.table.table-bordered.table-striped
   %thead
     %tr
-      %th DeliveryDateFrom
-      %th DeliveryDateTo
-      %th Shipping
-      %th SalesTax
-      %th TotalAmount
-      %th BillingAmount
-      %th
+      %th 注文日
+      %th 配送希望日
+      %th 合計金額
+      %th 代引き手数料
+      %th 送料
+      %th 消費税
+      %th 請求金額
+      %th 操作
 
   %tbody
-    - @order_histories.each do |order_history|
+    - @order_histories.order('created_at DESC').each do |order_history|
       %tr
-        %td= order_history.delivery_date_from
-        %td= order_history.delivery_date_to
-        %td= order_history.shipping
-        %td= order_history.sales_tax
-        %td= order_history.total_amount
-        %td= order_history.billing_amount
-        %td= link_to 'Show', order_history
+        %td= datetime_format(order_history.created_at)
+        %td= delivery_datetime_range_format(order_history.delivery_date_from, order_history.delivery_date_to)
+        %td= price_format(order_history.total_amount)
+        %td= price_format(order_history.cod_fee)
+        %td= price_format(order_history.shipping)
+        %td= price_format(order_history.sales_tax)
+        %td= price_format(order_history.billing_amount)
+        %td= link_to '詳細', order_history, class: 'btn btn-info'
 

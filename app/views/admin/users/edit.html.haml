@@ -1,34 +1,15 @@
-%h1 Editing user
-
-= form_for [:admin, @user] do |f|
-  - if @user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      %ul
-        - @user.errors.full_messages.each do |message|
-          %li= message
-
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :zip
-    = f.text_field :zip
-  .field
-    = f.label :address
-    = f.text_field :address
-  .field
-    = f.label :password
-    = f.password_field :password
-  .field
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  .actions
-    = f.submit 'Save'
-
-= link_to 'Show', admin_user_path(@user)
-\|
-= link_to 'Back', admin_users_path
+.col-md-5
+  %h1 ユーザー情報編集
+  %br
+  = simple_form_for [:admin, @user] do |f|
+    = f.input :email
+    = f.input :name
+    = f.input :zip
+    = f.input :address
+    = f.input :password, as: :password
+    = f.input :password_confirmation, as: :password
+    = f.button :submit, class: 'btn btn-primary'
+  %br
+  = link_to '詳細', admin_user_path(@user)
+  \|
+  = link_to 'ユーザー一覧に戻る', admin_users_path

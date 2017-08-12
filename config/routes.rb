@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'users/edit'
-  end
-
   root to:'items#index'
 
   devise_for :users, controllers: {

@@ -1,27 +1,25 @@
-%h1 Listing items
+%h1 商品一覧
 
-%table.table-bordered.table-sortable
+%table.table.table-bordered.table-striped.table-sortable
   %thead
     %tr
-      %th Name
-      %th Price
-      %th Row order
-      %th Image
-      %th
-      %th
-      %th
+      %th 商品画像
+      %th 商品名
+      %th 価格
+      %th.col_buttons 操作
 
   %tbody
     - @items.each do |item|
       %tr.item{data: { model_name: item.class.name.underscore, update_url: admin_item_sort_path(item) }}
+        %td
+          .item_image_frame_small= image_tag(item.image, class: 'img-rounded')
         %td= item.name
-        %td= item.price
-        %td= item.row_order
-        %td= item.image
-        %td= link_to 'Show', admin_item_path(item)
-        %td= link_to 'Edit', edit_admin_item_path(item)
-        %td= link_to 'Destroy', admin_item_path(item), method: :delete, data: { confirm: 'Are you sure?' }
+        %td= price_format(item.price)
+        %td
+          = link_to '詳細', admin_item_path(item), class: 'btn btn-info'
+          = link_to '編集', edit_admin_item_path(item), class: 'btn btn-primary'
+          = link_to '削除', admin_item_path(item), method: :delete, data: { confirm: '商品を削除してよろしいですか？' }, class: 'btn btn-danger'
 
 %br
 
-= link_to 'New Item', new_admin_item_path
+= link_to '新規商品登録', new_admin_item_path, class: 'btn btn-primary'

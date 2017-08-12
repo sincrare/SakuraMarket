@@ -1,6 +1,19 @@
 ---
 ja:
   activerecord:
+    attributes:
+      user:
+        name: '名前'
+        zip: '郵便番号'
+        address: '住所'
+      item:
+        name: '商品名'
+        price: '価格'
+        discription: '商品説明'
+        image: '商品画像'
+        active: '表示'
+      stocked_item:
+        add_count: '個数'
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

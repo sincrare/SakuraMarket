@@ -4,6 +4,8 @@ class Item < ApplicationRecord
   include RankedModel
   ranks :row_order
   mount_uploader :image, ImageUploader
+  has_many :stocked_item, dependent: :destroy
+  has_many :ordered_item, dependent: :nullify
 
   scope :active, -> { where(active: true) }
 end
