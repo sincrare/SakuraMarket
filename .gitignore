@@ -26,3 +26,4 @@
 .idea
 .secret
 /vendor/bundle/*
+/public/uploads/*
