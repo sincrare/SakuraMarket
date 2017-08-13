@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
   root to:'items#index'
 
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    sessions: 'users/sessions'
-  }
+  devise_for :users
   devise_scope :user do
     get 'users/edit_address' => 'users/registrations#edit_address'
     put 'users/update_address' => 'users/registrations#update_address'

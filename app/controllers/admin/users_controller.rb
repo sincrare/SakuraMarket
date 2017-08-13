@@ -23,7 +23,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-
   end
 
   private

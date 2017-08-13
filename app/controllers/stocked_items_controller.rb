@@ -1,29 +1,12 @@
 class StockedItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_stocked_item_all, only: [:index, :order_confirmation]
-  before_action :set_stocked_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_stocked_item, only: [:update, :destroy]
 
   def index
   end
 
   def show
-  end
-
-  def new
-    @stocked_item = current_user.stocked_items.new
-  end
-
-  def edit
-  end
-
-  def create
-    @stocked_item = current_user.stocked_items.find_or_create_by(stocked_item_params)
-
-    if @stocked_item.save
-      redirect_to @stocked_item, notice: 'Stocked item was successfully created.'
-    else
-      render :new
-    end
   end
 
   def update
