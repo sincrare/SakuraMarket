@@ -23,6 +23,9 @@
               = link_to '購入履歴', order_histories_path
             %li
               = link_to 'プロフィール変更', edit_user_registration_path
+            - if current_user.admin?
+              %li
+                = link_to '管理者画面', admin_items_path
             %li
               = link_to 'ログアウト', destroy_user_session_path, method: :delete
           - else
