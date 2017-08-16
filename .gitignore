@@ -27,3 +27,4 @@
 .secret
 /vendor/bundle/*
 /public/uploads/*
+/coverage/*

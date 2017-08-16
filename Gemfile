@@ -19,10 +19,11 @@ gem 'simple_form'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec'
+  gem 'capybara'
   gem 'rspec-rails'
-#  gem 'better_errors'
-#  gem 'binding_of_caller'
+  gem 'factory_girl_rails'
+  gem 'simplecov'
+  gem 'timecop'
 end
 
 group :development do
@@ -34,8 +35,4 @@ end
 
 group :production do
   gem 'rails_12factor'
-end
-
-group :test do
-  gem 'factory_girl_rails'
 end

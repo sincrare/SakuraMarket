@@ -15,7 +15,7 @@ class StockedItem < ApplicationRecord
       300
     elsif total < 30000 then
       400
-    elsif total <100000 then
+    elsif total < 100000 then
       600
     else
       1000
@@ -37,10 +37,10 @@ class StockedItem < ApplicationRecord
 
   def self.delivery_date_candidates
     date = Date.current.since(3.days)
-    business_date_range = 11
+    business_date_range = 12
     delivery_date_candidate = []
     business_date_range.times do
-      date = date.tomorrow while (date.wday <= 0 or date.wday >= 6 or HolidayJapan.check(date))
+      date = date.tomorrow while (date.wday <= 0 or date.wday >= 6 or HolidayJapan.check(date.to_date))
       delivery_date_candidate.push(date)
       date = date.tomorrow
     end
