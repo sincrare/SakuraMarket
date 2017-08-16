@@ -3,7 +3,7 @@
     %h2 ログインする
     = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       = f.input :email, input_html: { autofocus: true }, as: :email
-      = f.input :password, input_html: { autocomplete: "off" }, as: :password
+      = f.input :password, input_html: { autocomplete: "off" }, hint: '', as: :password
       = f.input :remember_me, as: :boolean
       = f.button :submit, "ログインする", class: 'btn btn-primary'
     %br

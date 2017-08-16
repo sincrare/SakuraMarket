@@ -6,7 +6,7 @@
       = f.input :name
       = f.input :zip
       = f.input :address
-      = f.input :password, input_html: { autocomplete: 'off' }, as: :password
+      = f.input :password, input_html: { autocomplete: 'off' }, hint: '', as: :password
       = f.input :password_confirmation, input_html: { autocomplete: 'off' }, as: :password
       = f.button :submit, '新規登録', class: 'btn btn-primary'
     %br
