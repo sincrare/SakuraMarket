@@ -52,6 +52,7 @@
         %th 住所
         %td= current_user.address
     = link_to '送付先を変更する', users_edit_address_path, class: 'btn btn-primary'
+%br
 
 - order_history = current_user.order_histories.build
 = simple_form_for order_history do |f|

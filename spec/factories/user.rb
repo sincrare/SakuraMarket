@@ -8,7 +8,7 @@ FactoryGirl.define do
     address '東京都港区1-2-3'
   end
 
-  factory :admin_user, class: :user do
+  factory :admin, class: :user do
     name 'admin'
     email 'admin@sample.com'
     password 'admin_password'

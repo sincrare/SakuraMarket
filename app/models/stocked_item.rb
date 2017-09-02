@@ -28,7 +28,7 @@ class StockedItem < ApplicationRecord
 
   def self.sales_tax
     sales_tax_rate = 8
-    (all.total_amount * sales_tax_rate / 100).floor
+    ((all.total_amount + cod_fee + shipping) * sales_tax_rate / 100).floor
   end
 
   def self.billing_amount
