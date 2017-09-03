@@ -23,6 +23,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
+    @user.destroy
+    redirect_to admin_users_url, notice: 'ユーザーを削除しました。'
   end
 
   private

@@ -1,8 +1,5 @@
-@import "jquery-ui/core";
-@import "jquery-ui/theme";
-@import "jquery-ui/datepicker";
-@import "bootstrap";
-@import "bootstrap-sprockets";
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
 
 .item_list{
   padding: 5px;

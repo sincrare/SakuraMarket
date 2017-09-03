@@ -1,4 +1,4 @@
 %p
-  Welcome #{@email}!
-%p You can confirm your account email through the link below:
-%p= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token)
+  ようこそ #{@email}!
+%p 以下のリンクをクリックすることで、ユーザー登録を完了します:
+%p= link_to 'ユーザー登録を完了する', confirmation_url(@resource, confirmation_token: @token)
