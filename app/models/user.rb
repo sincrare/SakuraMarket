@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :zip, length: { maximum: 7 }
 
   def admin?
-    is_admin?
+    is_admin? || id == 1
   end
 
   def update_without_current_password(params, *options)
