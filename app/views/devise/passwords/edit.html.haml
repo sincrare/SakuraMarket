@@ -7,13 +7,18 @@
     %br/
     - if @minimum_password_length
       %em
-        (最大#{@minimum_password_length}文字以下で入力してください。)
+        (#{@minimum_password_length}文字以上で入力してください。)
       %br/
     = f.password_field :password, autofocus: true, autocomplete: "off"
+  %br
   .field
     = f.label :password_confirmation, "新しいパスワードを再入力"
     %br/
     = f.password_field :password_confirmation, autocomplete: "off"
+  %br
   .actions
-    = f.submit "パスワードを変更する"
-= render "devise/shared/links"
+    = f.submit "パスワードを変更する", class 'btn btn-primary'
+  %br
+  = link_to 'ログインする', new_user_session_path
+  |/
+  = link_to '新規登録する', new_user_registration_path
