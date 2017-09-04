@@ -4,21 +4,15 @@
   = f.hidden_field :reset_password_token
   .field
     = f.label :password, "新しいパスワード"
-    %br/
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length}文字以上で入力してください。)
-      %br/
+    %br
     = f.password_field :password, autofocus: true, autocomplete: "off"
-  %br
+    %p.help-block= "#{@minimum_password_length}文字以上で入力してください。"
   .field
     = f.label :password_confirmation, "新しいパスワードを再入力"
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
+    .form-group= f.password_field :password_confirmation, autocomplete: "off"
   %br
   .actions
-    = f.submit "パスワードを変更する", class 'btn btn-primary'
-  %br
+    .form-group= f.submit 'パスワードを変更する', class: 'btn btn-primary'
   = link_to 'ログインする', new_user_session_path
-  |/
+  \|
   = link_to '新規登録する', new_user_registration_path
