@@ -6,6 +6,6 @@
       %dl
         %dt
           = link_to(item) do
-            .item_image_frame= image_tag(item.image, class: 'img-rounded')
+            .item_image_frame= image_tag(item.image, class: 'img-rounded', alt: item.name)
         %dd.item_name= item.name
         %dd.item_price= price_format(item.price)

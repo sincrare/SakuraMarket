@@ -2,18 +2,18 @@ require 'rails_helper'
 
 RSpec.describe StockedItem, type: :model do
   it '正常登録' do
-    stocked_item = FactoryGirl.build(:stocked_item)
+    stocked_item = FactoryGirl.create(:stocked_item)
     expect(stocked_item).to be_valid
   end
 
   it 'userが必須であること' do
-    stocked_item = FactoryGirl.build(:stocked_item)
+    stocked_item = FactoryGirl.create(:stocked_item)
     stocked_item.user = nil
     expect(stocked_item).not_to be_valid
   end
 
   it 'itemが必須であること' do
-    stocked_item = FactoryGirl.build(:stocked_item)
+    stocked_item = FactoryGirl.create(:stocked_item)
     stocked_item.item = nil
     expect(stocked_item).not_to be_valid
   end
@@ -78,7 +78,7 @@ RSpec.describe StockedItem, type: :model do
     user = FactoryGirl.create(:user)
     stocked_item_300_yen = FactoryGirl.create(:stocked_item_300_yen, user: user, count: 123)
     stocked_item_500_yen = FactoryGirl.create(:stocked_item_500_yen, user: user, count: 456)
-    expect(user.stocked_items.sales_tax).to eq ((123 * 300 + 456 * 500) * 0.08).floor
+    expect(user.stocked_items.sales_tax).to eq ((123 * 300 + 456 * 500 + 1000 + 69600) * 0.08).floor
   end
 
   it '請求金額は合計金額、代引き手数料、送料、消費税の合計であること' do
@@ -88,7 +88,7 @@ RSpec.describe StockedItem, type: :model do
     total_amount = 123 * 300 + 456 * 500
     cod_fee = 1000
     shipping = 116 * 600
-    sales_tax = (total_amount * 0.08).floor
+    sales_tax = ((total_amount + cod_fee + shipping) * 0.08).floor
     expect(user.stocked_items.billing_amount).to eq total_amount + cod_fee + shipping + sales_tax
   end
 
@@ -100,21 +100,20 @@ RSpec.describe StockedItem, type: :model do
   end
 
   it '送付希望日時には、3営業日から14営業日までの日付が選択肢となること' do
-    Time.zone = 'Tokyo'
     Timecop.freeze(2017, 9, 11, 10, 0, 0)
     delivery_date_candidate = []
-    delivery_date_candidate.push(Time.new(2017, 9, 14))
-    delivery_date_candidate.push(Time.new(2017, 9, 15))
-    delivery_date_candidate.push(Time.new(2017, 9, 19))
-    delivery_date_candidate.push(Time.new(2017, 9, 20))
-    delivery_date_candidate.push(Time.new(2017, 9, 21))
-    delivery_date_candidate.push(Time.new(2017, 9, 22))
-    delivery_date_candidate.push(Time.new(2017, 9, 25))
-    delivery_date_candidate.push(Time.new(2017, 9, 26))
-    delivery_date_candidate.push(Time.new(2017, 9, 27))
-    delivery_date_candidate.push(Time.new(2017, 9, 28))
-    delivery_date_candidate.push(Time.new(2017, 9, 29))
-    delivery_date_candidate.push(Time.new(2017, 10, 2))
+    delivery_date_candidate.push(Time.new(2017, 9, 14, 10, 0, 0))
+    delivery_date_candidate.push(Time.new(2017, 9, 15, 10, 0, 0))
+    delivery_date_candidate.push(Time.new(2017, 9, 19, 10, 0, 0))
+    delivery_date_candidate.push(Time.new(2017, 9, 20, 10, 0, 0))
+    delivery_date_candidate.push(Time.new(2017, 9, 21, 10, 0, 0))
+    delivery_date_candidate.push(Time.new(2017, 9, 22, 10, 0, 0))
+    delivery_date_candidate.push(Time.new(2017, 9, 25, 10, 0, 0))
+    delivery_date_candidate.push(Time.new(2017, 9, 26, 10, 0, 0))
+    delivery_date_candidate.push(Time.new(2017, 9, 27, 10, 0, 0))
+    delivery_date_candidate.push(Time.new(2017, 9, 28, 10, 0, 0))
+    delivery_date_candidate.push(Time.new(2017, 9, 29, 10, 0, 0))
+    delivery_date_candidate.push(Time.new(2017, 10, 2, 10, 0, 0))
     expect(StockedItem.delivery_date_candidates).to eq delivery_date_candidate
   end
 end

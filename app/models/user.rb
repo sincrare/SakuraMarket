@@ -4,10 +4,12 @@ class User < ApplicationRecord
 
   has_many :stocked_items, dependent: :destroy
   has_many :order_histories, dependent: :destroy
+  validates :email, presence: true
   validates :name, presence: true
   validates :zip, length: { maximum: 7 }
 
   def admin?
+    # コードレビューのため、初回登録ユーザーを管理者ユーザーとする
     is_admin? || id == 1
   end
 

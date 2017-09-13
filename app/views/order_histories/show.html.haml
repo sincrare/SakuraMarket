@@ -33,9 +33,9 @@
     - @order_history.ordered_items.each do |ordered_item|
       %tr
         %td
-          .item_image_frame_small= image_tag(ordered_item.image, class: 'img-rounded')
+          .item_image_frame_small= image_tag(ordered_item.image, class: 'img-rounded', alt: ordered_item.name)
         %td= ordered_item.name
-        %td= ordered_item.price
+        %td= price_format(ordered_item.price)
         %td= ordered_item.count
         %td
           - if ordered_item.item != nil

@@ -10,7 +10,7 @@
       %th.col_buttons 操作
 
   %tbody
-    - @users.each do |user|
+    - @users.order(:id).each do |user|
       %tr
         %td= user.email
         %td= user.name

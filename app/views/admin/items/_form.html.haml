@@ -1,9 +1,8 @@
-%br
-= simple_form_for [:admin, @item] do |f|
-  = f.input :name
-  = f.input :price, as: :integer
-  = f.input :discription, as: :text
-  = f.input :image, as: :file
-  = f.input :active, as: :boolean
-  = f.button :submit, class: 'btn btn-primary'
-%br
+.under_space
+  = simple_form_for [:admin, @item] do |f|
+    = f.input :name
+    = f.input :price
+    = f.input :description
+    = f.input :image
+    = f.input :active
+    = f.button :submit, class: 'btn btn-primary'

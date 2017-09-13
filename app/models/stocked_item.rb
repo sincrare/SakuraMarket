@@ -36,11 +36,11 @@ class StockedItem < ApplicationRecord
   end
 
   def self.delivery_date_candidates
-    date = Date.current.since(3.days)
+    date = 3.days.since
     business_date_range = 12
     delivery_date_candidate = []
     business_date_range.times do
-      date = date.tomorrow while (date.wday <= 0 or date.wday >= 6 or HolidayJapan.check(date.to_date))
+      date = date.tomorrow while (date.sunday? or date.saturday? or HolidayJapan.check(date.to_date))
       delivery_date_candidate.push(date)
       date = date.tomorrow
     end

@@ -1,15 +1,14 @@
 .col-md-5
   %h1 ユーザー情報編集
-  %br
-  = simple_form_for [:admin, @user] do |f|
-    = f.input :email
-    = f.input :name
-    = f.input :zip
-    = f.input :address
-    = f.input :password, as: :password
-    = f.input :password_confirmation, as: :password
-    = f.button :submit, class: 'btn btn-primary'
-  %br
+  .under_space
+    = simple_form_for [:admin, @user] do |f|
+      = f.input :email
+      = f.input :name
+      = f.input :zip
+      = f.input :address
+      = f.input :password
+      = f.input :password_confirmation
+      = f.button :submit, class: 'btn btn-primary'
   = link_to '詳細', admin_user_path(@user)
   \|
   = link_to 'ユーザー一覧に戻る', admin_users_path

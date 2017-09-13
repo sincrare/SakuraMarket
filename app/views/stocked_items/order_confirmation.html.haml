@@ -10,7 +10,7 @@
       %th.col_buttons 操作
 
   %tbody
-    - @stocked_items.each do |stocked_item|
+    - @stocked_items.order(:id).each do |stocked_item|
       %tr
         %td
           .item_image_frame_small= image_tag(stocked_item.item.image, class: 'img-rounded')

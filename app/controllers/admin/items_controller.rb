@@ -1,7 +1,5 @@
-class Admin::ItemsController < ApplicationController
+class Admin::ItemsController < Admin::ApplicationController
   layout 'admin'
-  before_action :authenticate_user!
-  before_action :authenticate_admin!
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -53,6 +51,6 @@ class Admin::ItemsController < ApplicationController
     end
 
     def item_params
-      params.require(:item).permit(:name, :price, :row_order_position, :image, :image_cache, :discription, :active)
+      params.require(:item).permit(:name, :price, :row_order_position, :image, :image_cache, :description, :active)
     end
 end

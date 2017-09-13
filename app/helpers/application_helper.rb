@@ -1,15 +1,14 @@
 module ApplicationHelper
   def price_format(price)
-    "#{price.to_s(:delimited)}円"
+    number_to_currency(price)
   end
 
   def date_format(date)
-    wd = ['日', '月', '火', '水', '木', '金', '土']
-    date.strftime("%-Y年%-m月%-d日(#{wd[date.wday]})")
+    l date, format: "%-Y年%-m月%-d日(%a)"
   end
 
   def datetime_format(date)
-    "#{date_format(date)} #{date.strftime('%-H時%-M分')}"
+    l date, format: "%-Y年%-m月%-d日(%a) %-H時%-M分"
   end
 
   def delivery_datetime_range_format(from, to)

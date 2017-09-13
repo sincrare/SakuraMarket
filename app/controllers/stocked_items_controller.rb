@@ -1,7 +1,6 @@
 class StockedItemsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_stocked_item_all, only: [:index, :order_confirmation]
-  before_action :set_stocked_item, only: [:update, :destroy]
+  before_action :set_stocked_items_all, only: [:index, :order_confirmation]
+  before_action :set_stocked_items, only: [:update, :destroy]
 
   def index
   end
@@ -30,11 +29,11 @@ class StockedItemsController < ApplicationController
   end
 
   private
-    def set_stocked_item_all
+    def set_stocked_items_all
       @stocked_items = current_user.stocked_items.all
     end
 
-    def set_stocked_item
+    def set_stocked_items
       @stocked_item = current_user.stocked_items.find(params[:id])
     end
 

@@ -10,10 +10,10 @@
       %th.col_buttons 操作
 
   %tbody
-    - @stocked_items.each do |stocked_item|
+    - @stocked_items.order(:id).each do |stocked_item|
       %tr
         %td
-          .item_image_frame_small= image_tag(stocked_item.item.image, class: 'img-rounded')
+          .item_image_frame_small= image_tag(stocked_item.item.image, class: 'img-rounded', alt: stocked_item.item.name)
         %td= stocked_item.item.name
         %td= price_format(stocked_item.item.price)
         %td= stocked_item.count

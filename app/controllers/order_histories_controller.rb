@@ -1,23 +1,25 @@
 class OrderHistoriesController < ApplicationController
-  before_action :authenticate_user!
-
   def index
-    @order_histories = OrderHistory.all
+    @order_histories = current_user.order_histories.all
   end
 
   def show
-    @order_history = OrderHistory.find(params[:id])
+    @order_history = current_user.order_histories.find(params[:id])
   end
 
   def create
     @order_history = current_user.order_histories.build(order_history_params)
 
-    if @order_history.save
-      current_user.stocked_items.delete_all
-      redirect_to @order_history, notice: '注文を受付けました。'
-    else
-      @stocked_items = current_user.stocked_items.all
-      render 'stocked_items/order_confirmation'
+    OrderHistory.transaction do
+      if @order_history.save
+        current_user.stocked_items.each do |stocked_item|
+          stocked_item.destroy!
+        end
+        redirect_to @order_history, notice: '注文を受付けました。'
+      else
+        @stocked_items = current_user.stocked_items.all
+        render 'stocked_items/order_confirmation'
+      end
     end
   end
 

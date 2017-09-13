@@ -9,7 +9,7 @@ ja:
       item:
         name: '商品名'
         price: '価格'
-        discription: '商品説明'
+        description: '商品説明'
         image: '商品画像'
         active: '表示'
       stocked_item:

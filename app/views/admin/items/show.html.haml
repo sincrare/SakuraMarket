@@ -7,7 +7,7 @@
   = price_format(@item.price)
 %p
   %b 商品説明:
-  = @item.discription
+  = simple_format(@item.description)
 %p
   %b 商品画像:
   - if @item.image?

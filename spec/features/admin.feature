@@ -8,7 +8,7 @@ Feature: admin
     When '新規商品登録'リンクをクリックする
     When 'item_name'に'りんご'を入力する
     When 'item_price'に'150'を入力する
-    When 'item_discription'に'おいしいりんごです'を入力する
+    When 'item_description'に'おいしいりんごです'を入力する
     When '登録する'ボタンをクリックする
     Then '商品を登録しました。'と表示される
 

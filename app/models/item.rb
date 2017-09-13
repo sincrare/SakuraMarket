@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   validates :name, presence: true
-  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 2147483647 }
+  validates :price, presence: true
+  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 1000000 }
   include RankedModel
   ranks :row_order
   mount_uploader :image, ImageUploader
